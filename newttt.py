@@ -115,12 +115,6 @@ def drawMove(board, boardRow, boardCol, Mark):
     grid[boardRow][boardCol] = Mark
 
 
-def random_place(board, player):
-    selection = gameWon(board)
-    current_loc = random.choice(selection)
-    board[current_loc] = player
-    return (board)
-
 
 def gameWon(board):
     # check if anyone has won the game
