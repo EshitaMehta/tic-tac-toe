@@ -9,7 +9,7 @@ playerType = " "    # player type between human and computer
 player1 = "HUMAN"   # player1 will be human
 player2 = ""
 player1choice = ""
-playerChoice = player1choice   # choice between X/O
+playerChoice = ""   # choice between X/O
 player2choice = ""
 currentPlayer = ""
 grid = [[None, None, None],
@@ -111,10 +111,8 @@ def assignMark( mark ):
         print(" Type only X or O")
         exit()
         return False
-    playerChoice=player1choice
     print(" PLAYER1 goes first your mark - ", player1choice)
     print(" PLAYER2 your mark - ", player2choice)
-    return playerChoice
 
 #current player
 def current_player(player):
@@ -143,8 +141,9 @@ def playerDetails():
     player1choice = input(" PLAYER1 CHOOSE BETWEEN X AND O - ").upper()
     # put the choice
     assignMark(player1choice)
-
     current_player(player1)
+   # playerChoice = player1choice
+    #print(playerChoice)
 
 
 def drawStatus(board):
@@ -153,11 +152,11 @@ def drawStatus(board):
     global playerChoice, winner,player1choice
 
     # determine the status message
-    Mark()
-    choice=playerChoice
+
+    #playerChoice
     # status message
     if (winner is None):
-        message = choice + "'s turn "
+        message = playerChoice + "'s turn "
 
 
     else:
@@ -270,6 +269,7 @@ def game_over(winner):
 
 # player full details
 playerDetails()
+playerChoice=player1choice
 
 # initialize pygame and window
 pygame.init()
@@ -282,7 +282,6 @@ pygame.display.set_icon(cross)
 
 # create the game board
 board = initBoard(ttt)
-#playerChoice=player1choice
 print("Pc ", playerChoice)
 showBoard(ttt, board)
 
