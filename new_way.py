@@ -222,13 +222,6 @@ def getPlayerMove():
         compClick(board)
         Mark()
 
-
-    #print(player2Type)
-    #if player1Type == "HUMAN" or player2Type == "HUMAN":
-#        return
-#    elif player2Type == "COMPUTER":
-#        return
-
 def compClick(board):
 
     global grid, player2choice, playerChoice
