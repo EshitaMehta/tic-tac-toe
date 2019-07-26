@@ -5,7 +5,9 @@ os.environ["SDL_VIDEO_WINDOW_POS"] = '500,100'
 pygame.mixer.init()
 
 # global variables
-playerType = " "    # player type between human and computer
+playerType = " "
+player1Type=" "
+player2Type=" "     # player type between human and computer
 player1 = "HUMAN"   # player1 will be human
 player2 = ""
 player1choice = ""
@@ -89,18 +91,25 @@ def boardPos(mouseX, mouseY):
     # return the tuple containing the row & column
     return (row, col)
 
-def checkPlayerType( type ):
+# to check player type
+def checkPlayerType(type):
+    global player2Type
     if ( type == "HUMAN" ):
+        player2Type = "HUMAN"
         return True
     elif ( type == "COMPUTER"):
+        player2Type = "COMPUTER"
         return True
     else:
         print(" Type only human or computer")
         exit()
         return False
+
+    #return player2Type
+
 def assignMark( mark ):
 
-    global player2choice ,player1choice
+    global player2choice, player1choice
     if (mark == "X"):
         player2choice = "O"
 
@@ -113,12 +122,13 @@ def assignMark( mark ):
         return False
     print(" PLAYER1 goes first your mark - ", player1choice)
     print(" PLAYER2 your mark - ", player2choice)
+    return player2choice
 
 #current player
 def current_player(player):
 
     global currentPlayer, player1, player2
-
+    player
     currentPlayer=player
     if(currentPlayer == player1 ):
         currentPlayer= player2
@@ -129,22 +139,23 @@ def current_player(player):
 # Player Details
 def playerDetails():
 
-    global player1, player2, player1choice
+    global player1, player2, player1choice,player2Type
     print(" PLAYER1 IS HUMAN , CHOOSE THE OPPONENT - ")
     player2 = input("ENTER COMPUTER OR HUMAN - ").upper()
     # check type of player2
     checkPlayerType(player2)
+    player2Type = player2
+    print(player2Type)
 
     print(" Player1 = HUMAN VS "
           "Player2 = ", player2)
     # get the player1 choice
     player1choice = input(" PLAYER1 CHOOSE BETWEEN X AND O - ").upper()
     # put the choice
+    player1Type = "HUMAN"
     assignMark(player1choice)
     current_player(player1)
-   # playerChoice = player1choice
-    #print(playerChoice)
-
+    return player1Type , player2Type
 
 def drawStatus(board):
     # draw the status at the bottom of the board
@@ -157,7 +168,6 @@ def drawStatus(board):
     # status message
     if (winner is None):
         message = playerChoice + "'s turn "
-
 
     else:
         message = winner + " congratulations you won!"
@@ -199,7 +209,51 @@ def clickBoard(board):
     drawMove(board, row, col, playerChoice)
 
     # toggle XO to the other player's move
-    Mark()
+    #Mark()
+
+def getPlayerMove():
+    global player2Type,  player1Type, currentPlayer
+    player1Type= "HUMAN"
+    if player1Type == "HUMAN" or player2Type == "HUMAN":
+        clickBoard(board)
+        Mark()
+
+    if player2Type == "COMPUTER":
+        compClick(board)
+        Mark()
+
+
+    #print(player2Type)
+    #if player1Type == "HUMAN" or player2Type == "HUMAN":
+#        return
+#    elif player2Type == "COMPUTER":
+#        return
+
+def compClick(board):
+
+    global grid, player2choice, playerChoice
+
+    def Enquiry(list):
+        if not list:
+            return 1
+        else:
+            return 0
+
+    val = None
+    list = [(index, row.index(val)) for index, row in enumerate(grid) if val in row]
+    #print(list)
+
+    if Enquiry(list):
+        print("The list is Empty")
+    else:
+        print("The list is not empty")
+        number = random.choice(list)
+        # print(number)
+        # print(row, col)
+        row = number[0]
+        col = number[1]
+        drawMove(board, row, col, playerChoice)
+
 
 
 def drawMove(board, boardRow, boardCol, Mark):
@@ -282,7 +336,7 @@ pygame.display.set_icon(cross)
 
 # create the game board
 board = initBoard(ttt)
-print("Pc ", playerChoice)
+
 showBoard(ttt, board)
 
 # main event loop
@@ -295,7 +349,11 @@ while True:
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
 
-                clickBoard(board)
+
+
+                player1="HUMAN"
+                player2=""
+                getPlayerMove()
                 gameWon(board)
 
         # update the display
