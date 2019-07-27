@@ -14,6 +14,9 @@ player1choice = ""
 playerChoice = ""   # choice between X/O
 player2choice = ""
 currentPlayer = ""
+playerName=" "
+player1Name=""
+player2Name=""
 grid = [[None, None, None],
         [None, None, None],
         [None, None, None]]
@@ -139,16 +142,17 @@ def current_player(player):
 # Player Details
 def playerDetails():
 
-    global player1, player2, player1choice,player2Type
+    global player1, player2, player1choice,player2Type, player1Name,player2Name
     print(" PLAYER1 IS HUMAN , CHOOSE THE OPPONENT - ")
     player2 = input("ENTER COMPUTER OR HUMAN - ").upper()
+    player1Name= input("ENTER PLAYER1 NAME - ").upper()
+    player2Name= input("ENTER PLAYER2 NAME - ").upper()
     # check type of player2
     checkPlayerType(player2)
     player2Type = player2
     print(player2Type)
 
-    print(" Player1 = HUMAN VS "
-          "Player2 = ", player2)
+    print(player1Name ," VS ", player2Name )
     # get the player1 choice
     player1choice = input(" PLAYER1 CHOOSE BETWEEN X AND O - ").upper()
     # put the choice
@@ -160,17 +164,32 @@ def playerDetails():
 def drawStatus(board):
     # draw the status at the bottom of the board
     # gain access to global variables
-    global playerChoice, winner,player1choice
+    global playerChoice, winner,player1choice,grid ,playerName
 
     # determine the status message
+    sumX = 0
+    sumO = 0
+    for i in range(0, 3):
+        for j in range(0, 3):
+            if grid[i][j] == "X":
+                sumX += 1
+            if grid[i][j] == "O":
+                sumO += 1
 
-    #playerChoice
+    # playerChoice
     # status message
-    if (winner is None):
-        message = playerChoice + "'s turn "
+    if (sumX + sumO != 9):
+        if (winner is None):
+            message = playerChoice + "'s turn "
 
-    else:
-        message = winner + " congratulations you won!"
+        else:
+            message = winner + " congratulations you won!"
+
+    elif (sumX+ sumO == 9 ):
+        if (winner is None):
+                
+            message = "TIE"
+
 
     font = pygame.font.Font(None, 30)
     text = font.render(message, 1, (10, 10, 10))
@@ -178,7 +197,6 @@ def drawStatus(board):
     # copy the  message on board
     board.fill((250, 250, 250), (0, 300, 300, 25))
     board.blit(text, (10, 300))
-
 
 
 def Mark():
@@ -237,7 +255,17 @@ def compClick(board):
     #print(list)
 
     if Enquiry(list):
-        print("The list is Empty")
+        print("The list is Empty"
+              " IT IS A TIE")
+
+        font = pygame.font.Font(None, 30)
+        text = font.render("IT is a TIE", 1, (10, 10, 10))
+
+        # copy the  message on board
+        board.fill((250, 250, 250), (0, 300, 300, 25))
+        board.blit(text, (10, 300))
+        game_over(winner)
+
     else:
         print("The list is not empty")
         number = random.choice(list)
@@ -307,6 +335,10 @@ def gameWon(board):
         winner = grid[0][2]
         pygame.draw.line(board, (250, 0, 0), (250, 50), (50, 250), 5)
 
+    return True
+
+
+
 # game over function
 def game_over(winner):
     if (winner != None):
@@ -341,8 +373,6 @@ while True:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
-
-
 
                 player1="HUMAN"
                 player2=""
