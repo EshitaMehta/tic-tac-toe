@@ -191,16 +191,29 @@ def drawStatus(board):
         else:
             message = winner + " congratulations you won!"
 
+        font = pygame.font.Font(None, 30)
+        text = font.render(message, 1, (10, 10, 10))
+
+        board.fill((250, 250, 250), (0, 300, 300, 25))
+        board.blit(text, (10, 300))
+
+
     elif (sumX + sumO == 9):
         if (winner is None):
-            message = "TIE"
+            msg = "TIE"
+            font = pygame.font.Font(None, 30)
+            text = font.render(msg, 1, (10, 10, 10))
 
-    font = pygame.font.Font(None, 30)
-    text = font.render(message, 1, (10, 10, 10))
+            # copy the  message on board
+            board.fill((250, 250, 250), (0, 300, 300, 25))
+            board.blit(text, (10, 300))
+
+    #font = pygame.font.Font(None, 30)
+    #text = font.render(message, 1, (10, 10, 10))
 
     # copy the  message on board
-    board.fill((250, 250, 250), (0, 300, 300, 25))
-    board.blit(text, (10, 300))
+    #board.fill((250, 250, 250), (0, 300, 300, 25))
+    #board.blit(text, (10, 300))
 
 
 def Mark():
@@ -268,28 +281,31 @@ def compClick(board):
     print(list)
 
     if Enquiry(list):
-        print("The list is Empty"
-              " IT IS A TIE")
+        print("The list is Empty")
 
-        font = pygame.font.Font(None, 30)
-        text = font.render("IT is a TIE", 1, (10, 10, 10))
-
-        # copy the  message on board
-        board.fill((250, 250, 250), (0, 300, 300, 25))
-        board.blit(text, (10, 300))
-        game_over(winner)
 
     else:
 
         for e in range(1):
             print("The list is not empty")
             number = random.choice(corner)
-            # print(number)
-            #                print(row, col)
             row = number[0]
             col = number[1]
+            num = random.choice(side)
+            row1= num[0]
+            col1= num[1]
+
+            # print(number)
+            #                print(row, col)
+
             if grid[row][col] == None:
                 drawMove(board, row, col, playerChoice)
+
+            elif grid[row1][col1] == None:
+                drawMove(board,row1,col1,playerChoice)
+
+
+
             else:
                 for itm in range(0, 3):
                     if (grid[itm][0] == grid[itm][1] == player2choice):
