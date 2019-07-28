@@ -265,6 +265,8 @@ def compClick(board):
     corner=[(0,0),(0,2),(2,0),(2,2)]
     side=[(0,1),(1,0),(1,2),(2,1)]
     middle=[(1,1)]
+    print("P1", player1choice)
+    print("P2", player2choice)
 
 # computer's smart move
          # FOR PUTTING O
@@ -285,7 +287,6 @@ def compClick(board):
 
 
     else:
-
         for e in range(1):
             print("The list is not empty")
             number = random.choice(corner)
@@ -296,15 +297,10 @@ def compClick(board):
             col1= num[1]
 
             # print(number)
-            #                print(row, col)
+            #    print(row, col)
 
             if grid[row][col] == None:
                 drawMove(board, row, col, playerChoice)
-
-            elif grid[row1][col1] == None:
-                drawMove(board,row1,col1,playerChoice)
-
-
 
             else:
                 for itm in range(0, 3):
@@ -390,12 +386,25 @@ def compClick(board):
                             row = 0
                             col = itm
                             drawMove(board, row, col, playerChoice)
+                    elif (grid[0][0]==grid[1][1]==player1choice):
+                        if (grid[2][2]== None):
+                            row = 2
+                            col = 2
+                            drawMove(board, row, col, playerChoice)
 
-# -----------------------------------------------------------------------------------------------------------------
+                    elif (grid[0][0]==grid[2][2]==player1choice):
+                        if(grid[1][1]== None):
+                            row = 1
+                            col = 1
+                            drawMove(board, row, col, playerChoice)
 
-# ----------------------------------------------------------------------------------------------------------------------
+                    elif (grid[1][1]==grid[2][2]==player1choice):
+                        if (grid[0][0]==None):
+                            row = 0
+                            col = 0
+                            drawMove(board,row,col,playerChoice)
 
-def drawMove(board, boardRow, boardCol, Mark):
+def drawMove(board,boardRow, boardCol, Mark):
     # draw an X or O (Mark) on the board in boardRow, boardCol
     # determine the center of the square
     centerX = ((boardCol) * 100) + 50
