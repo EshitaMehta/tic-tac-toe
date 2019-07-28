@@ -283,22 +283,13 @@ def compClick(board):
     list = [(index, row.index(val)) for index, row in enumerate(grid) if val in row]
 
     print(list)
-
+    print(grid)
     if Enquiry(list):
         print("The list is Empty")
     else:
-        if (grid[1][1]==None):
-            row=1
-            col=1
-            drawMove(board, row, col, playerChoice)
-        elif (grid[1][0]==None):
-            row=1
-            col=0
-            drawMove(board, row, col, playerChoice)
-
 
 # row moves
-        elif (grid[0][0]==grid[0][1]== player2choice and grid[0][2]== None):
+        if (grid[0][0]==grid[0][1]== player2choice and grid[0][2]== None):
             row=0
             col= 2
             drawMove(board,row,col,playerChoice)
@@ -507,9 +498,9 @@ def compClick(board):
             col = 2
             drawMove(board, row, col, playerChoice)
 # else
-        elif(grid[1][1]==None):
-            row=1
-            col=1
+        elif(grid[0][0]==None):
+            row=0
+            col=0
             drawMove(board,row,col,playerChoice)
         elif (grid[0][2] == None):
             row = 0
@@ -524,6 +515,20 @@ def compClick(board):
             col = 2
             drawMove(board, row, col, playerChoice)
 
+        elif(grid[1][1] == None):
+            row=1
+            col=1
+            drawMove(board,row,col,playerChoice)
+
+        elif (grid[1][0] == None):
+            row = 1
+            col = 0
+            drawMove(board, row, col, playerChoice)
+
+        elif (grid[0][1]==None):
+            row=0
+            col=1
+            drawMove(board,row,col,playerChoice)
 
 
 
@@ -628,6 +633,7 @@ while True:
                 player2 = ""
                 getPlayerMove()
                 gameWon(board)
+
 
         # update the display
 
