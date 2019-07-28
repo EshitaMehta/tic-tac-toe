@@ -514,11 +514,7 @@ def compClick(board):
             row = 2
             col = 2
             drawMove(board, row, col, playerChoice)
-
-        elif(grid[1][1] == None):
-            row=1
-            col=1
-            drawMove(board,row,col,playerChoice)
+           
 
         elif (grid[1][0] == None):
             row = 1
