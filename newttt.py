@@ -256,6 +256,7 @@ def getPlayerMove():
         Mark()
 
     if player2Type == "COMPUTER":
+        pygame.time.wait(500)
         compClick(board)
         Mark()
 
@@ -265,6 +266,7 @@ def compClick(board):
     corner=[(0,0),(0,2),(2,0),(2,2)]
     side=[(0,1),(1,0),(1,2),(2,1)]
     middle=[(1,1)]
+
     print("P1", player1choice)
     print("P2", player2choice)
 
@@ -279,130 +281,251 @@ def compClick(board):
 
     val = None
     list = [(index, row.index(val)) for index, row in enumerate(grid) if val in row]
-   # list1 = [(0,1),(1,2),(2,1),(2,2)]
+
     print(list)
 
     if Enquiry(list):
         print("The list is Empty")
-
-
     else:
-        for e in range(1):
-            print("The list is not empty")
-            number = random.choice(corner)
-            row = number[0]
-            col = number[1]
-            num = random.choice(side)
-            row1= num[0]
-            col1= num[1]
-
-            # print(number)
-            #    print(row, col)
-
-            if grid[row][col] == None:
-                drawMove(board, row, col, playerChoice)
-
-            else:
-                for itm in range(0, 3):
-                    if (grid[itm][0] == grid[itm][1] == player2choice):
-                        if (grid[itm][2] == None):
-                            col = 2
-                            row = itm
-                            drawMove(board, row, col, playerChoice)
-                            # grid[row][2] = 'O'
-                            return row, col
-
-                    elif (grid[itm][0] == grid[itm][2] == player2choice):
-                        if (grid[itm][1] == None):
-                            col = 1
-                            row = itm
-                            drawMove(board, row, col, playerChoice)
-                            # grid[row][1] = 'O'
-                            return row, col
-
-                    elif (grid[itm][1] == grid[itm][2] == player2choice):
-                        if (grid[itm][0] == None):
-                            col = 0
-                            row = itm
-                            drawMove(board, row, col, playerChoice)
-                            # grid[row][0] = 'O'
-                            return row, col
-
-                    # --------------------------------------------------------------------------------------------------
-                    elif (grid[itm][0] == grid[itm][1] == player1choice):
-                        if (grid[itm][2] == None):
-                            col = 2
-                            row = itm
-                            drawMove(board, row, col, playerChoice)
-                            return row, col
-
-                            # grid[row][2] = 'O'
-                    elif (grid[itm][0] == grid[itm][2] == player1choice):
-                        if (grid[itm][1] == None):
-                            col = 1
-                            row = itm
-                            drawMove(board, row, col, playerChoice)
-                            # grid[row][1] = 'O'
-                            return row, col
-
-                    elif (grid[itm][1] == grid[itm][2] == player1choice):
-                        if (grid[itm][0] == None):
-                            col = 0
-                            row = itm
-                            drawMove(board, row, col, playerChoice)
-                            # grid[row][0] = 'O'
-                            return row, col
+        if (grid[1][1]==None):
+            row=1
+            col=1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[1][0]==None):
+            row=1
+            col=0
+            drawMove(board, row, col, playerChoice)
 
 
-                    elif (grid[0][itm] == grid[1][itm] == player2choice):
-                        if (grid[2][itm] == None):
-                            row = 2
-                            col = itm
-                            drawMove(board, row, col, playerChoice)
-                    elif (grid[0][itm] == grid[2][itm] == player2choice):
-                        if (grid[1][itm] == None):
-                            row = 1
-                            col = itm
-                            drawMove(board, row, col, playerChoice)
+# row moves
+        elif (grid[0][0]==grid[0][1]== player2choice and grid[0][2]== None):
+            row=0
+            col= 2
+            drawMove(board,row,col,playerChoice)
+        elif (grid[0][0]==grid[0][2]== player2choice and grid[0][1]== None):
+            row=0
+            col= 1
+            drawMove(board,row,col,playerChoice)
+        elif (grid[0][2]==grid[0][1]== player2choice and grid[0][0]== None):
+            row=0
+            col= 0
+            drawMove(board,row,col,playerChoice)
 
-                    elif (grid[2][itm] == grid[1][itm] == player2choice):
-                        if (grid[0][itm] == None):
-                            row = 0
-                            col = itm
-                            drawMove(board, row, col, playerChoice)
-                    elif (grid[0][itm] == grid[1][itm] == player1choice):
-                        if (grid[2][itm] == None):
-                            row = 2
-                            col = itm
-                            drawMove(board, row, col, playerChoice)
-                    elif (grid[0][itm] == grid[2][itm] == player1choice):
-                        if (grid[1][itm] == None):
-                            row = 1
-                            col = itm
-                            drawMove(board, row, col, playerChoice)
+        elif (grid[1][0]==grid[1][1]== player2choice and grid[1][2]== None):
+            row=1
+            col= 2
+            drawMove(board,row,col,playerChoice)
+        elif (grid[1][0]==grid[1][2]== player2choice and grid[1][1]== None):
+            row=1
+            col= 1
+            drawMove(board,row,col,playerChoice)
+        elif (grid[1][2]==grid[1][1]== player2choice and grid[1][0]== None):
+            row=1
+            col= 0
+            drawMove(board,row,col,playerChoice)
+        elif (grid[2][0]==grid[2][1]== player2choice and grid[2][2]== None):
+            row=2
+            col= 2
+            drawMove(board,row,col,playerChoice)
+        elif (grid[2][0]==grid[2][2]== player2choice and grid[2][1]== None):
+            row=2
+            col= 1
+            drawMove(board,row,col,playerChoice)
+        elif (grid[2][2]==grid[2][1]== player2choice and grid[2][0]== None):
+            row=2
+            col= 0
+            drawMove(board,row,col,playerChoice)
 
-                    elif (grid[2][itm] == grid[1][itm] == player1choice):
-                        if (grid[0][itm] == None):
-                            row = 0
-                            col = itm
-                            drawMove(board, row, col, playerChoice)
-                    elif (grid[0][0]==grid[1][1]==player1choice):
-                        if (grid[2][2]== None):
-                            row = 2
-                            col = 2
-                            drawMove(board, row, col, playerChoice)
+# col moves for computer
+        elif (grid[0][0] == grid[1][0] == player2choice and grid[2][0] == None):
+            row = 2
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][0] == grid[2][0] == player2choice and grid[1][0] == None):
+            row = 1
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][0] == grid[1][0] == player2choice and grid[0][0] == None):
+            row = 0
+            col = 0
+            drawMove(board, row, col, playerChoice)
 
-                    elif (grid[0][0]==grid[2][2]==player1choice):
-                        if(grid[1][1]== None):
-                            row = 1
-                            col = 1
-                            drawMove(board, row, col, playerChoice)
+        elif (grid[0][1] == grid[1][1] == player2choice and grid[2][1] == None):
+            row = 2
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][1] == grid[2][1] == player2choice and grid[1][1] == None):
+            row = 1
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][1] == grid[1][1] == player2choice and grid[0][1] == None):
+            row = 0
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[1][2] == player2choice and grid[2][2] == None):
+            row = 2
+            col = 2
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[2][2] == player2choice and grid[1][2] == None):
+            row = 1
+            col = 2
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][2] == grid[1][2] == player2choice and grid[0][2] == None):
+            row = 0
+            col = 2
+            drawMove(board, row, col, playerChoice)
 
-                    elif (grid[1][1]==grid[2][2]==player1choice):
-                        if (grid[0][0]==None):
-                            row = 0
-                            col = 0
-                            drawMove(board,row,col,playerChoice)
+# diagonal check for computer
+
+        elif (grid[0][0] == grid[1][1] == player2choice and grid[2][2] == None):
+            row = 2
+            col = 2
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][0] == grid[2][2] == player2choice and grid[1][1] == None):
+            row = 1
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[1][1] == grid[2][2] == player2choice and grid[0][0] == None):
+            row = 0
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[1][1] == player2choice and grid[2][0] == None):
+            row = 2
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[2][0] == player2choice and grid[1][1] == None):
+            row = 1
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][0] == grid[1][1] == player2choice and grid[0][2] == None):
+            row = 0
+            col = 2
+            drawMove(board, row, col, playerChoice)
+
+# diagonal check for opponent
+        elif (grid[0][0] == grid[1][1] == player1choice and grid[2][2] == None):
+            row = 2
+            col = 2
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][0] == grid[2][2] == player1choice and grid[1][1] == None):
+            row = 1
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[1][1] == grid[2][2] == player1choice and grid[0][0] == None):
+            row = 0
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[1][1] == player1choice and grid[2][0] == None):
+            row = 2
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[2][0] == player1choice and grid[1][1] == None):
+            row = 1
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][0] == grid[1][1] == player1choice and grid[0][2] == None):
+            row = 0
+            col = 2
+            drawMove(board, row, col, playerChoice)
+
+
+#  block opponent row moves
+        elif (grid[0][0]==grid[0][1]== player1choice and grid[0][2]== None):
+            row=0
+            col= 2
+            drawMove(board,row,col,playerChoice)
+        elif (grid[0][0]==grid[0][2]== player1choice and grid[0][1]== None):
+            row=0
+            col= 1
+            drawMove(board,row,col,playerChoice)
+        elif (grid[0][2]==grid[0][1]== player1choice and grid[0][0]== None):
+            row=0
+            col= 0
+            drawMove(board,row,col,playerChoice)
+
+        elif (grid[1][0]==grid[1][1]== player1choice and grid[1][2]== None):
+            row=1
+            col= 2
+            drawMove(board,row,col,playerChoice)
+        elif (grid[1][0]==grid[1][2]== player1choice and grid[1][1]== None):
+            row=1
+            col= 1
+            drawMove(board,row,col,playerChoice)
+        elif (grid[1][2]==grid[1][1]== player1choice and grid[1][0]== None):
+            row=1
+            col= 0
+            drawMove(board,row,col,playerChoice)
+        elif (grid[2][0]==grid[2][1]== player1choice and grid[2][2]== None):
+            row=2
+            col= 2
+            drawMove(board,row,col,playerChoice)
+        elif (grid[2][0]==grid[2][2]== player1choice and grid[2][1]== None):
+            row=2
+            col= 1
+            drawMove(board,row,col,playerChoice)
+        elif (grid[2][2]==grid[2][1]== player1choice and grid[2][0]== None):
+            row=2
+            col= 0
+            drawMove(board,row,col,playerChoice)
+
+# block opponent col moves
+        elif (grid[0][0] == grid[1][0] == player1choice and grid[2][0] == None):
+            row = 2
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][0] == grid[2][0] == player1choice and grid[1][0] == None):
+            row = 1
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][0] == grid[1][0] == player1choice and grid[0][0] == None):
+            row = 0
+            col = 0
+            drawMove(board, row, col, playerChoice)
+
+        elif (grid[0][1] == grid[1][1] == player1choice and grid[2][1] == None):
+            row = 2
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][1] == grid[2][1] == player1choice and grid[1][1] == None):
+            row = 1
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][1] == grid[1][1] == player1choice and grid[0][1] == None):
+            row = 0
+            col = 1
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[1][2] == player1choice and grid[2][2] == None):
+            row = 2
+            col = 2
+            drawMove(board, row, col, playerChoice)
+        elif (grid[0][2] == grid[2][2] == player1choice and grid[1][2] == None):
+            row = 1
+            col = 2
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][2] == grid[1][2] == player1choice and grid[0][2] == None):
+            row = 0
+            col = 2
+            drawMove(board, row, col, playerChoice)
+# else
+        elif(grid[1][1]==None):
+            row=1
+            col=1
+            drawMove(board,row,col,playerChoice)
+        elif (grid[0][2] == None):
+            row = 0
+            col = 2
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][0] == None):
+            row = 2
+            col = 0
+            drawMove(board, row, col, playerChoice)
+        elif (grid[2][2] == None):
+            row = 2
+            col = 2
+            drawMove(board, row, col, playerChoice)
+
+
+
 
 def drawMove(board,boardRow, boardCol, Mark):
     # draw an X or O (Mark) on the board in boardRow, boardCol
